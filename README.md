@@ -61,6 +61,7 @@ COPY /etc/example.gpkg /srv/data/example.gpkg
 ```
 Running the example above will create a service on the url: http:/localhost/example/wfs? An working example can be found: https://github.com/PDOK/mapserver-wfs-gpkg/tree/natura2000-example
 
+## Misc
 ### Why no WMS
 If one wants a [OGC WMS](http://www.opengeospatial.org/standards/wms) service, then we have our [pdok/mapserver-wms-gpkg](https://github.com/PDOK/mapserver-wms-gpkg) image.
 So why are those (WFS and WMS) seperated? We regard both service as completly different. Regarding microservices it is logical to split those from each other. Also in our experience we have run to often into issues that the same data is exposed as a WMS and WFS.
