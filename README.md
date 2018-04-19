@@ -68,6 +68,9 @@ So why are those (WFS and WMS) seperated? We regard both service as completly di
 ### Why Geopackage
 With our prefered way of usage the data source is copied into the Docker image. This makes the data also scalable, instead of putting all our different datasets into one (or two) big database that cannot scale up or down and are therefore scaled for max capacity.
 
+### Why NGINX
+We would like to run this on a scalable infrastructure like Kubernetes that has it's Ingress based on NGINX. By keeping both the same we hope to have less differentiation in our application stack.
+
 ### Used examples
 * https://github.com/srounet/docker-mapserver
 * ...
