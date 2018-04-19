@@ -24,7 +24,7 @@ RUN update-locale LANG=C.UTF-8
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         libpng-dev \
-		libfreetype6-dev \
+	libfreetype6-dev \
         libjpeg-dev \
         libexempi-dev \
         libfcgi-dev \
@@ -47,9 +47,9 @@ RUN mkdir /usr/local/src/mapserver/build && \
         -DWITH_HARFBUZZ=OFF \
         -DWITH_ICONV=OFF \
         -DWITH_CAIRO=OFF \
-		-DWITH_SVGCAIRO=OFF \
+	-DWITH_SVGCAIRO=OFF \
         -DWITH_RSVG=OFF \
-		-DWITH_MYSQL=OFF \
+	-DWITH_MYSQL=OFF \
         -DWITH_FCGI=ON \		
         -DWITH_GEOS=ON \
         -DWITH_POSTGIS=OFF \
@@ -61,26 +61,26 @@ RUN mkdir /usr/local/src/mapserver/build && \
         -DWITH_WFS=ON \
         -DWITH_WCS=OFF \		
         -DWITH_LIBXML2=ON \
-		-DWITH_THREAD_SAFETY=OFF \		
+	-DWITH_THREAD_SAFETY=OFF \		
         -DWITH_GIF=OFF \
-		-DWITH_PYTHON=OFF \
-		-DWITH_PHP=OFF \
-		-DWITH_PERL=OFF \
-		-DWITH_RUBY=OFF \
-		-DWITH_JAVA=OFF \
-		-DWITH_CSHARP=OFF \
-		-DWITH_ORACLESPATIAL=OFF \
-		-DWITH_ORACLE_PLUGIN=OFF \
-		-DWITH_MSSQL2008=OFF \
-		-DWITH_SDE_PLUGIN=OFF \
-		-DWITH_SDE=OFF \
+	-DWITH_PYTHON=OFF \
+	-DWITH_PHP=OFF \
+	-DWITH_PERL=OFF \
+	-DWITH_RUBY=OFF \
+	-DWITH_JAVA=OFF \
+	-DWITH_CSHARP=OFF \
+	-DWITH_ORACLESPATIAL=OFF \
+	-DWITH_ORACLE_PLUGIN=OFF \
+	-DWITH_MSSQL2008=OFF \
+	-DWITH_SDE_PLUGIN=OFF \
+	-DWITH_SDE=OFF \
         -DWITH_EXEMPI=ON \
         -DWITH_XMLMAPFILE=ON \
-		-DWITH_V8=OFF \
-		-DBUILD_STATIC=OFF \
-		-DLINK_STATIC_LIBMAPSERVER=OFF \
-		-DWITH_APACHE_MODULE=OFF \
-		-DWITH_GENERIC_NINT=OFF \
+	-DWITH_V8=OFF \
+	-DBUILD_STATIC=OFF \
+	-DLINK_STATIC_LIBMAPSERVER=OFF \
+	-DWITH_APACHE_MODULE=OFF \
+	-DWITH_GENERIC_NINT=OFF \
         -DWITH_USE_POINT_Z_M=ON \
         -DCMAKE_PREFIX_PATH=/opt/gdal && \
     make && \
@@ -99,7 +99,7 @@ COPY --from=0 /usr/local/lib /usr/local/lib
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         libpng-dev \
-		libfreetype6-dev \
+	libfreetype6-dev \
         libjpeg-dev \
         libexempi-dev \
         libfcgi-dev \
