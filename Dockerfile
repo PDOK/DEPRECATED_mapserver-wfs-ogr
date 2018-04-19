@@ -119,13 +119,12 @@ RUN apt-get update && \
 	supervisor \
 	spawn-fcgi && \
     rm -rf /var/lib/apt/lists/*
-	
-RUN mkdir -p /var/log/supervisor
-
-COPY etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 RUN apt-get clean
 
+RUN mkdir -p /var/log/supervisor
+
+COPY etc/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY etc/nginx.conf /etc/nginx/sites-available/default
 
 EXPOSE 80
