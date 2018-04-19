@@ -20,3 +20,4 @@ docker run -d -p 80:80 --name natura2000-service natura2000-example
 
 Check if it works: http://localhost/natura2000/wfs?request=getcapabilities&service=wfs&version=2.0.0 should return an getcapabilities document.
 
+![getcapabilities](/img/getcapabilities-natura2000.jpg)
