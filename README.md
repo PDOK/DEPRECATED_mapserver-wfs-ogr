@@ -9,6 +9,9 @@ Fulfilling the first need the many purpose is to create an Docker base image tha
 
 Regarding the second need, finding a usable Mapserver Docker image is a challenge. Most images expose the &map=... QUERY_STRING in the getcapabilities, don't run in fastcgi and are based on Apache.
 
+## What will it do
+It will create an WFS-only Mapserver application run with a modern web application NGINX in which the map=.. QUERY_STRING is fixed. The application will work best incombination with GDAL/OGR vector datasources like: [Geopackage](http://www.geopackage.org/) of SHAPE files. 
+
 ## Components
 This stack is composed of the following:
 * [Mapserver](http://mapserver.org/)
@@ -44,12 +47,12 @@ docker build -t pdok/mapserver-wfs-gkpg .
 ```
 
 ### Run
-This image can be run straight from the commandline. A volumn needs to be mounted on the container directory /srv/data. The mounted volumn needs to contain a mapserver *.map file. The name of the mapfile will determine the URL path for the service.
+This image can be run straight from the commandline. A volumn needs to be mounted on the container directory /srv/data. The mounted volumn needs to contain at least one mapserver *.map file. The name of the mapfile will determine the URL path for the service.
 ```
 docker run -d -p 80:80 --name mapserver-run-example -v /path/on/host:/srv/data pdok/mapserver-wfs-gpkg
 ```
 
-Alternatively this image can be used as a Docker base image for an other Dockerfile, in which the necessay files are copied into the right directory (/srv/data)
+The prefered way to use it is as a Docker base image for an other Dockerfile, in which the necessay files are copied into the right directory (/srv/data)
 ```
 FROM pdok/mapserver-wfs-gpkg
 
@@ -58,3 +61,13 @@ COPY /etc/example.gpkg /srv/data/example.gpkg
 ```
 Running the example above will create a service on the url: http:/localhost/example/wfs? An working example can be found: https://github.com/PDOK/mapserver-wfs-gpkg/tree/natura2000-example
 
+### Why no WMS
+If one wants a [OGC WMS](http://www.opengeospatial.org/standards/wms) service, then we have our [pdok/mapserver-wms-gpkg](https://github.com/PDOK/mapserver-wms-gpkg) image.
+So why are those (WFS and WMS) seperated? We regard both service as completly different. Regarding microservices it is logical to split those from each other. Also in our experience we have run to often into issues that the same data is exposed as a WMS and WFS.
+
+### Why Geopackage
+With our prefered way of usage the data source is copied into the Docker image. This makes the data also scalable, instead of putting all our different datasets into one (or two) big database that cannot scale up or down and are therefore scaled for max capacity.
+
+### Used examples
+* https://github.com/srounet/docker-mapserver
+* ...
