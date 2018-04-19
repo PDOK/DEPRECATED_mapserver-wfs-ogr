@@ -1,4 +1,4 @@
-FROM pdok/mapserver-wfs:0.1
+FROM pdok/mapserver-wfs-gpkg
 
 COPY /etc/natura2000.map /srv/data/natura2000.map
 COPY /etc/natura2000.gpkg /srv/data/natura2000.gpkg
