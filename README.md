@@ -1,12 +1,12 @@
 # Natura2000 example
 
 ## Introduction
-This is a example implementation of our [Docker base image](https://github.com/PDOK/mapserver-wfs-gpkg). It contains a mapfile natura2000.map and a geopackage natura2000.gpkg containing the vector data.
+This is a example implementation of our [Docker base image](https://github.com/PDOK/mapserver-wfs-ogr). It contains a mapfile natura2000.map and a geopackage natura2000.gpkg containing the vector data.
 
 ## Usage
 ```
-git clone https://github.com/PDOK/mapserver-wfs-gpkg.git
-cd /mapserver-wfs-gpkg
+git clone https://github.com/PDOK/mapserver-wfs-ogr.git
+cd /mapserver-wfs-ogr
 git checkout natura2000-example
 ```
 
