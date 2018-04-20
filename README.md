@@ -49,21 +49,21 @@ docker build -t pdok/mapserver-wfs-gkpg .
 ### Run
 This image can be run straight from the commandline. A volumn needs to be mounted on the container directory /srv/data. The mounted volumn needs to contain at least one mapserver *.map file. The name of the mapfile will determine the URL path for the service.
 ```
-docker run -d -p 80:80 --name mapserver-run-example -v /path/on/host:/srv/data pdok/mapserver-wfs-gpkg
+docker run -d -p 80:80 --name mapserver-run-example -v /path/on/host:/srv/data pdok/mapserver-wfs-ogr
 ```
 
 The prefered way to use it is as a Docker base image for an other Dockerfile, in which the necessay files are copied into the right directory (/srv/data)
 ```
-FROM pdok/mapserver-wfs-gpkg
+FROM pdok/mapserver-wfs-ogr
 
 COPY /etc/example.map /srv/data/example.map
 COPY /etc/example.gpkg /srv/data/example.gpkg
 ```
-Running the example above will create a service on the url: http:/localhost/example/wfs? An working example can be found: https://github.com/PDOK/mapserver-wfs-gpkg/tree/natura2000-example
+Running the example above will create a service on the url: http:/localhost/example/wfs? An working example can be found: https://github.com/PDOK/mapserver-wfs-ogr/tree/natura2000-example
 
 ## Misc
 ### Why no WMS
-If one wants a [OGC WMS](http://www.opengeospatial.org/standards/wms) service, then we have our [pdok/mapserver-wms-gpkg](https://github.com/PDOK/mapserver-wms-gpkg) image.
+If one wants a [OGC WMS](http://www.opengeospatial.org/standards/wms) service, then we have our [pdok/mapserver-wms-ogr](https://github.com/PDOK/mapserver-wms-ogr) image.
 So why are those (WFS and WMS) seperated? We regard both service as completly different. Regarding microservices it is logical to split those from each other. Also in our experience we have run to often into issues that the same data is exposed as a WMS and WFS.
 
 ### Why Geopackage
