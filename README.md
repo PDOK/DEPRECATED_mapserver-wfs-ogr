@@ -43,7 +43,7 @@ The service stage copies the Mapserver, build in the first stage, and configures
 
 ### Build
 ```
-docker build -t pdok/mapserver-wfs-gkpg .
+docker build -t pdok/mapserver-wfs-ogr .
 ```
 
 ### Run
