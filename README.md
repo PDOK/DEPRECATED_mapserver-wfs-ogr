@@ -1,4 +1,4 @@
-# Mapserver WFS Geopackage
+# Mapserver WFS OGR
 
 ## Introduction
 This project aims to fulfill two needs:
@@ -15,6 +15,7 @@ It will create an WFS-only Mapserver application run with a modern web applicati
 ## Components
 This stack is composed of the following:
 * [Mapserver](http://mapserver.org/)
+* [OGR2OGR](http://www.gdal.org/ogr2ogr.html)
 * [NGINX](https://www.nginx.com/)
 * [Supervisor](http://supervisord.org/)
 
@@ -23,6 +24,9 @@ Mapserver is the platform that will provide the WFS service.
 
 ### NGINX
 NGINX is the web server we use to run Mapserver as a fastcgi web application. 
+
+### OGR2OGR
+For transforming simple features from a data store to WFS features.
 
 ### Supervisor
 Because we are running 2 processes (Mapserver CGI & NGINX) in a single Docker image we use Supervisor as a controller.
