@@ -100,7 +100,7 @@ COPY --from=0 /usr/local/lib /usr/local/lib
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         libpng-dev \
-    libfreetype6-dev \
+        libfreetype6-dev \
         libjpeg-dev \
         libexempi-dev \
         libfcgi-dev \
