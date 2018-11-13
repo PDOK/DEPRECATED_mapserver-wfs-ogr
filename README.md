@@ -1,7 +1,19 @@
 # Mapserver WFS OGR
 
+## TL;DR
+
+```docker
+docker build -t pdok/mapserver-wfs-ogr .
+docker run -e MS_MAPFILE='/srv/data/example.map' -d -p 80:80 --name mapserver-example -v /path/on/host:/srv/data pdok/mapserver-wfs-ogr
+
+docker stop mapserver-example
+docker rm mapserver-example
+```
+
 ## Introduction
+
 This project aims to fulfill two needs:
+
 1. create a [OGC WFS](http://www.opengeospatial.org/standards/wfs) service that is deployable on a scalable infrastructure.
 2. create a useable [Docker](https://www.docker.com) base image.
 
@@ -10,42 +22,48 @@ Fulfilling the first need the main purpose is to create an Docker base image tha
 Regarding the second need, finding a usable Mapserver Docker image is a challenge. Most images expose the &map=... QUERY_STRING in the getcapabilities, don't run in fastcgi and are based on Apache.
 
 ## What will it do
+
 It will create an WFS-only Mapserver application run with a modern web application NGINX in which the map=.. QUERY_STRING is fixed. The application will work best incombination with GDAL/OGR vector datasources like: [Geopackage](http://www.geopackage.org/) or SHAPE files. 
 
 ## Components
+
 This stack is composed of the following:
+
 * [Mapserver](http://mapserver.org/)
 * [OGR2OGR](http://www.gdal.org/ogr2ogr.html)
-* [NGINX](https://www.nginx.com/)
-* [Supervisor](http://supervisord.org/)
+* [Lighttpd](https://www.lighttpd.net/)
 
 ### Mapserver
-Mapserver is the platform that will provide the WFS service.
 
-### NGINX
-NGINX is the web server we use to run Mapserver as a fastcgi web application. 
+Mapserver is the platform that will provide the WFS services based on a raster datasource.
 
 ### OGR2OGR
+
 For transforming simple features from a data store to WFS features.
 
-### Supervisor
-Because we are running 2 processes (Mapserver CGI & NGINX) in a single Docker image we use Supervisor as a controller.
+### Lighttpd
+
+Lighttpd is the web server we use to run Mapserver as a fastcgi web application.
 
 ## Docker image
 
 The Docker image contains 2 stages:
+
 1. builder
-2. Service
+2. service
 
 ### builder
+
 The builder stage compiles Mapserver. The Dockerfile contains all the available Mapserver build option explicitly, so it is clear which options are enabled and disabled. In this case the options like -DWITH_WFS are enabled and -DWITH_WMS are disabled, because we want only an WFS service.
 
 ### service
+
 The service stage copies the Mapserver, build in the first stage, and configures NGINX and Supervisor.
 
 ## Usage
 
 ### Build
+
 ```
 docker build -t pdok/mapserver-wfs-ogr .
 ```
